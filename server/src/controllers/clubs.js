@@ -1,5 +1,5 @@
 const knex = require("../connection");
-const foundElementIfIdExists = require("../utils/foundElementIfIdExists");
+const foundElementById = require("../utils/foundElementById");
 const {
 	schemaRegisterClub,
 	schemaUpdateClub,
@@ -29,8 +29,12 @@ const registerClub = async (req, res) => {
 const detailClub = async (req, res) => {
 	const { id } = req.params;
 	try {
-		const clubFound = await foundElementIfIdExists(id, "clubs");
-		return res.status(200).json(clubFound);
+		const { error, message, data } = await foundElementById("clubs", id);
+		if (error) {
+			return res.status(400).json(message);
+		}
+
+		return res.status(200).json(data);
 	} catch (error) {
 		return res.status(500).json(error.message);
 	}
@@ -56,7 +60,10 @@ const updateClub = async (req, res) => {
 	try {
 		await schemaUpdateClub.validate(req.body);
 
-		await foundElementIfIdExists(id, "clubs");
+		const { error, message } = await foundElementById("clubs", id);
+		if (error) {
+			return res.status(400).json(message);
+		}
 
 		if (name) {
 			const clubAlreadyExists = await knex("clubs")
@@ -81,7 +88,10 @@ const updateClub = async (req, res) => {
 const deleteClub = async (req, res) => {
 	const { id } = req.params;
 	try {
-		await foundElementIfIdExists(id, "clubs");
+		const { error, message } = await foundElementById("clubs", id);
+		if (error) {
+			return res.status(400).json(message);
+		}
 
 		const clubDeleted = await knex("clubs").del().where({ id });
 		if (!clubDeleted) {
