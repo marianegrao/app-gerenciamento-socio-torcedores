@@ -5,13 +5,13 @@ CREATE TABLE IF NOT EXISTS users (
   	name TEXT NOT NULL,
   	email TEXT NOT NULL UNIQUE,
   	password TEXT NOT NULL,
-    status TEXT DEFAULT "active"
+    status TEXT DEFAULT 'active'
 );
 
 CREATE TABLE IF NOT EXISTS clubs (
 	  id SERIAL PRIMARY KEY,
-    id_user INTEGER NOT NULL,
-  	name TEXT NOT NULL UNIQUE,
+    name TEXT NOT NULL UNIQUE,
+    insignia  TEXT NOT NULL,
     monthly_subscription INTEGER NOT NULL,
     instagram TEXT,
     website TEXT,
