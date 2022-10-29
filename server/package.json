@@ -19,5 +19,8 @@
 		"pg": "^8.8.0",
 		"yup": "^0.32.11",
 		"yup-locales": "^1.2.10"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.20"
 	}
 }

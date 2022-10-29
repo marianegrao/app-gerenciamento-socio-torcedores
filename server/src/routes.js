@@ -4,7 +4,7 @@ const routes = express();
 const signIn = require("./controllers/signIn");
 const signUp = require("./controllers/signUp");
 
-const isUserLogaded = require("./middleware/isUserLogaded");
+const isUserLogaded = require("./middlewares/isUserLogaded");
 
 const users = require("./controllers/users");
 const clubs = require("./controllers/clubs");
