@@ -9,6 +9,7 @@ const isUserLogaded = require("./middlewares/isUserLogaded");
 const users = require("./controllers/users");
 const clubs = require("./controllers/clubs");
 const subscriptions = require("./controllers/subscriptions");
+const invoices = require("./controllers/invoices");
 
 routes.post("/signin", signIn);
 routes.post("/signup", signUp);
@@ -23,5 +24,8 @@ routes.use(isUserLogaded);
 routes.get("/users", users.detailUser);
 routes.patch("/users", users.updateUser);
 routes.delete("/users", users.deleteUser);
+
+routes.post("/clubs/:id/subscription", subscriptions.registerSubscription);
+routes.get("/invoices", invoices.listInvoices);
 
 module.exports = routes;
