@@ -5,6 +5,8 @@ const foundElementIfIdExists = async (id, table) => {
 		if (!idExists) {
 			return "Não foi encontrado elemento com o id informado.";
 		}
+		//TODO: retirar os erros do console em caso de id não existir
+
 		return idExists;
 	} catch (error) {
 		return error.message;

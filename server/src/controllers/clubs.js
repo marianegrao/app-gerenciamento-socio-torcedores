@@ -79,8 +79,16 @@ const updateClub = async (req, res) => {
 };
 
 const deleteClub = async (req, res) => {
+	const { id } = req.params;
 	try {
-		return res.status(200).json("deleteClub is working");
+		await foundElementIfIdExists(id, "clubs");
+
+		const clubDeleted = await knex("clubs").del().where({ id });
+		if (!clubDeleted) {
+			res.status(404).json("Clube não foi deletado");
+		}
+
+		res.status(200).json("Clube deletado com sucesso!");
 	} catch (error) {
 		return res.status(500).json(error.message);
 	}
