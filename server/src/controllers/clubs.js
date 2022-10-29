@@ -40,7 +40,13 @@ const detailClub = async (req, res) => {
 
 const listClubs = async (req, res) => {
 	try {
-		return res.status(200).json("listClubs is working");
+		const clubsListed = await knex("clubs").select("*");
+
+		if (!clubsListed) {
+			return res.status(404).json("Não foi possível listar clubes");
+		}
+
+		return res.json(clubsListed);
 	} catch (error) {
 		return res.status(500).json(error.message);
 	}
