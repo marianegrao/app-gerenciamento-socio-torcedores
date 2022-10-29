@@ -1,9 +1,7 @@
 const yup = require("./settings");
-
-const schemaSignUp = yup.object().shape({
+const schemaUpdateUser = yup.object().shape({
 	name: yup.string(),
 	email: yup.string().email(),
 	password: yup.string().min(5),
 });
-
-module.exports = schemaSignUp;
+module.exports = { schemaUpdateUser };
