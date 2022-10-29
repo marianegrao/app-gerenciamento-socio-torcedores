@@ -8,7 +8,7 @@ export default function SignIn() {
     <Cointainer>
       <ContainerLeft>
         <h3>Gerencie todas assinaturas dos seus times em um só lugar.</h3>
-        <Image src={WomanCheeringImage} alt="" />
+        <Image src={WomanCheeringImage} alt="mulher torcedora" />
       </ContainerLeft>
       <ContainerRight>
         <CardForm>

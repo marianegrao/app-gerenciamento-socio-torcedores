@@ -1,10 +1,15 @@
 import { Cointainer, Button } from "./styles";
-export default function FormLogin() {
+export default function FormSignUp() {
   return (
     <Cointainer>
       <div>
+        <label>Nome</label>
+        <input placeholder="Digite seu nome" type="text" />
+      </div>
+
+      <div>
         <label>E-mail</label>
-        <input placeholder="Digite seu e-mail" type="text" />
+        <input placeholder="Digite seu e-mail" type="email" />
       </div>
 
       <div>
@@ -12,7 +17,7 @@ export default function FormLogin() {
         <input placeholder="Digite sua senha" type="password" />
       </div>
 
-      <Button>Entrar</Button>
+      <Button>Cadastrar</Button>
     </Cointainer>
   );
 }

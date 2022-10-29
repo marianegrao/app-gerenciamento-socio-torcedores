@@ -36,7 +36,6 @@ export const Cointainer = styled.form`
     font-size: 1.6rem;
     line-height: 2.4rem;
     color: #344054;
-
     ::placeholder {
       color: #667085;
     }
@@ -51,6 +50,7 @@ export const Button = styled.button`
   width: 16rem;
   height: 3.3rem;
   padding: 0.4rem 4rem;
+  margin-bottom: 3rem;
 
   background-color: #034a2a;
   border-radius: 1rem;
