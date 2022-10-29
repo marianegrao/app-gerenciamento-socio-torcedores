@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const knex = require("../connection");
 const { schemaUpdateUser } = require("../validations/schemasUsers");
-
+const jwt = require("jsonwebtoken");
 const detailUser = (req, res) => {
 	try {
 		return res.json(req.user);
@@ -43,8 +43,18 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
+	const { id } = req.user;
+
 	try {
-		return res.status(200).json("deleteUser is working");
+		if (!id) {
+			return;
+		}
+		const userDeleted = await knex("users").del().where({ id });
+		if (!userDeleted) {
+			res.status(404).json("Usuário não foi deletado");
+		}
+
+		res.status(200).json("Usuário deletado com sucesso!");
 	} catch (error) {
 		return res.status(500).json(error.message);
 	}
