@@ -7,4 +7,14 @@ const schemaRegisterClub = yup.object().shape({
 	twitter: yup.string(),
 	website: yup.string(),
 });
-module.exports = { schemaRegisterClub };
+
+const schemaUpdateClub = yup.object().shape({
+	name: yup.string(),
+	monthly_subscription: yup.number(),
+	insignia: yup.string(),
+	instagram: yup.string(),
+	twitter: yup.string(),
+	website: yup.string(),
+});
+
+module.exports = { schemaRegisterClub, schemaUpdateClub };

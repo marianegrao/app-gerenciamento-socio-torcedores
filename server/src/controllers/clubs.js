@@ -1,5 +1,9 @@
 const knex = require("../connection");
-const { schemaRegisterClub } = require("../validations/schemasClubs");
+const foundElementIfIdExists = require("../utils/foundElementIfIdExists");
+const {
+	schemaRegisterClub,
+	schemaUpdateClub,
+} = require("../validations/schemasClubs");
 
 const registerClub = async (req, res) => {
 	const { name } = req.body;
@@ -25,14 +29,8 @@ const registerClub = async (req, res) => {
 const detailClub = async (req, res) => {
 	const { id } = req.params;
 	try {
-		const clubFound = await knex("clubs").where({ id }).first();
-		if (!clubFound) {
-			return res
-				.status(404)
-				.json("Não foi encontrado clube com o id informado.");
-		}
-
-		return res.json(clubFound);
+		const clubFound = await foundElementIfIdExists(id, "clubs");
+		return res.status(200).json(clubFound);
 	} catch (error) {
 		return res.status(500).json(error.message);
 	}
@@ -53,8 +51,28 @@ const listClubs = async (req, res) => {
 };
 
 const updateClub = async (req, res) => {
+	const { id } = req.params;
+	const { name } = req.body;
 	try {
-		return res.status(200).json("updateClub is working");
+		await schemaUpdateClub.validate(req.body);
+
+		await foundElementIfIdExists(id, "clubs");
+
+		if (name) {
+			const clubAlreadyExists = await knex("clubs")
+				.where({ name })
+				.whereNot({ id })
+				.first();
+			if (clubAlreadyExists)
+				return res.status(404).json("Já existe clube com esse nome.");
+		}
+
+		const clubUpdated = await knex("clubs").update(req.body).where({ id });
+		if (!clubUpdated) {
+			res.status(404).json("Clube não foi atualizado");
+		}
+
+		res.status(200).json("Clube foi atualizado com sucesso!");
 	} catch (error) {
 		return res.status(500).json(error.message);
 	}
