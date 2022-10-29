@@ -1,8 +1,10 @@
-import { Cointainer } from "./styles";
+import { SidebarHome } from "../../components/SideBar";
+import { Container, Main } from "./styles";
 export default function Home() {
   return (
-    <Cointainer>
-      <h1>Home</h1>
-    </Cointainer>
+    <Container>
+      <SidebarHome />
+      <Main>Home</Main>
+    </Container>
   );
 }

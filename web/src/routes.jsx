@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes, Navigate, Outlet } from "react-router-dom";
+import AccountDetails from "./pages/AccountDetails";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -17,6 +18,7 @@ export default function MyRoutes() {
 
         <Route element={<ProtectedRoutes redirectTo={"/"} />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/my-account" element={<AccountDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>
