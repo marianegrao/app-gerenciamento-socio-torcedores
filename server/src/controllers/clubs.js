@@ -1,4 +1,4 @@
-const registerClub = () => {
+const registerClub = async (req, res) => {
 	try {
 		return res.status(200).json("registerClub is working");
 	} catch (error) {
@@ -6,7 +6,7 @@ const registerClub = () => {
 	}
 };
 
-const listClubs = () => {
+const listClubs = async (req, res) => {
 	try {
 		return res.status(200).json("listClubs is working");
 	} catch (error) {
@@ -14,7 +14,7 @@ const listClubs = () => {
 	}
 };
 
-const detailClub = () => {
+const detailClub = async (req, res) => {
 	try {
 		return res.status(200).json("detailClub is working");
 	} catch (error) {
@@ -22,7 +22,7 @@ const detailClub = () => {
 	}
 };
 
-const updateClub = () => {
+const updateClub = async (req, res) => {
 	try {
 		return res.status(200).json("updateClub is working");
 	} catch (error) {
@@ -30,7 +30,7 @@ const updateClub = () => {
 	}
 };
 
-const deleteClub = () => {
+const deleteClub = async (req, res) => {
 	try {
 		return res.status(200).json("deleteClub is working");
 	} catch (error) {

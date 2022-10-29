@@ -1,4 +1,4 @@
-const detailUser = () => {
+const detailUser = async (req, res) => {
 	try {
 		return res.status(200).json("detailUser is working");
 	} catch (error) {
@@ -6,7 +6,7 @@ const detailUser = () => {
 	}
 };
 
-const updateUser = () => {
+const updateUser = async (req, res) => {
 	try {
 		return res.status(200).json("updateUser is working");
 	} catch (error) {
@@ -14,7 +14,7 @@ const updateUser = () => {
 	}
 };
 
-const deleteUser = () => {
+const deleteUser = async (req, res) => {
 	try {
 		return res.status(200).json("deleteUser is working");
 	} catch (error) {
