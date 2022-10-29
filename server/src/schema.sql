@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS clubs (
 	  id SERIAL PRIMARY KEY,
     id_user INTEGER NOT NULL,
   	name TEXT NOT NULL UNIQUE,
+    monthly_subscription INTEGER NOT NULL,
     instagram TEXT,
     website TEXT,
     twitter TEXT
