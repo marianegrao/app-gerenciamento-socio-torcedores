@@ -48,7 +48,7 @@ const listClubs = async (req, res) => {
 		const clubsListed = await knex("clubs").select("*");
 
 		if (!clubsListed) {
-			return res.status(404).json("Não foi possível listar clubes");
+			return res.status(400).json("Não foi possível listar clubes");
 		}
 
 		return res.json(clubsListed);
@@ -79,7 +79,7 @@ const updateClub = async (req, res) => {
 
 		const clubUpdated = await knex("clubs").update(req.body).where({ id });
 		if (!clubUpdated) {
-			res.status(404).json("Clube não foi atualizado");
+			res.status(400).json("Clube não foi atualizado");
 		}
 
 		res.status(200).json("Clube foi atualizado com sucesso!");
@@ -98,7 +98,7 @@ const deleteClub = async (req, res) => {
 
 		const clubDeleted = await knex("clubs").del().where({ id });
 		if (!clubDeleted) {
-			res.status(404).json("Clube não foi deletado");
+			res.status(400).json("Clube não foi deletado");
 		}
 
 		res.status(200).json("Clube deletado com sucesso!");
