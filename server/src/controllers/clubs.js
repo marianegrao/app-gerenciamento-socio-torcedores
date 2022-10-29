@@ -29,9 +29,12 @@ const registerClub = async (req, res) => {
 const detailClub = async (req, res) => {
 	const { id } = req.params;
 	try {
-		const { error, message, data } = await foundElementById("clubs", id);
+		const { error, message, data, status } = await foundElementById(
+			"clubs",
+			id
+		);
 		if (error) {
-			return res.status(400).json(message);
+			return res.status(status).json(message);
 		}
 
 		return res.status(200).json(data);
@@ -60,9 +63,9 @@ const updateClub = async (req, res) => {
 	try {
 		await schemaUpdateClub.validate(req.body);
 
-		const { error, message } = await foundElementById("clubs", id);
+		const { error, message, status } = await foundElementById("clubs", id);
 		if (error) {
-			return res.status(400).json(message);
+			return res.status(status).json(message);
 		}
 
 		if (name) {
@@ -88,9 +91,9 @@ const updateClub = async (req, res) => {
 const deleteClub = async (req, res) => {
 	const { id } = req.params;
 	try {
-		const { error, message } = await foundElementById("clubs", id);
+		const { error, message, status } = await foundElementById("clubs", id);
 		if (error) {
-			return res.status(400).json(message);
+			return res.status(status).json(message);
 		}
 
 		const clubDeleted = await knex("clubs").del().where({ id });
