@@ -11,5 +11,11 @@ export const GlobalStyle = createGlobalStyle`
     }
     body{
         font-size: 1.6rem;
+        font-family: 'Montserrat', sans-serif;
+        font-family: 'Nunito', sans-serif;
+    }
+    button{
+        cursor: pointer;
+        border: unset;
     }
 `;
