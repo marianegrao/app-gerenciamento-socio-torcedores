@@ -69,7 +69,7 @@ const listSubscriptions = async (req, res) => {
 	}
 };
 
-const detailSubscriptions = async (req, res) => {
+const detailSubscription = async (req, res) => {
 	const { id } = req.params;
 	try {
 		const { error, message, data, status } = await foundElementById(
@@ -89,5 +89,5 @@ const detailSubscriptions = async (req, res) => {
 module.exports = {
 	registerSubscription,
 	listSubscriptions,
-	detailSubscriptions,
+	detailSubscription,
 };

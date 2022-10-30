@@ -26,6 +26,8 @@ routes.patch("/users", users.updateUser);
 routes.delete("/users", users.deleteUser);
 
 routes.post("/clubs/:id/subscription", subscriptions.registerSubscription);
+routes.get("/subscriptions", subscriptions.listSubscriptions);
+routes.get("/subscriptions/:id", subscriptions.detailSubscription);
 routes.get("/invoices", invoices.listInvoices);
 routes.patch("/invoices/:id", invoices.payInvoice);
 
