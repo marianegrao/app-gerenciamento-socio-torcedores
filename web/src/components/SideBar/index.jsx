@@ -27,7 +27,7 @@ export function SidebarAccountDetails() {
   return (
     <Cointainer>
       <Link to="/home">
-        <div style={{ color: "#0e8750" }}>
+        <div>
           <House color="#9b9bb2" size={45} alt="tela principal" />
           <span>Home</span>
         </div>

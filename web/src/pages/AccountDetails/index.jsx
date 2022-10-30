@@ -1,6 +1,8 @@
 import { SidebarAccountDetails } from "../../components/SideBar";
-import { Container, Main, Header, CardUserData } from "./styles";
+import { Container, Main, Header, CardTableInvoices } from "./styles";
 import { User } from "phosphor-react";
+import CardDatailUser from "../../components/CardDatailUser";
+import TableInvoices from "../../components/TableInvoices";
 export default function AccountDetails() {
   return (
     <Container>
@@ -11,14 +13,12 @@ export default function AccountDetails() {
           <h1>Nome do usuário</h1>
         </Header>
 
-        <CardUserData>
-          <h2>Dados do cliente</h2>
+        <CardDatailUser />
 
-          <div>
-            <strong>E-mail</strong>
-            <span>sarasilva@gmail.com</span>
-          </div>
-        </CardUserData>
+        <CardTableInvoices>
+          <h2>Minhas faturas</h2>
+          <TableInvoices />
+        </CardTableInvoices>
       </Main>
     </Container>
   );
