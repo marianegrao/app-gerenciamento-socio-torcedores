@@ -21,6 +21,7 @@ export default function MyRoutes() {
           <Route path="/home" element={<Home />} />
           <Route path="/my-account" element={<AccountDetails />} />
         </Route>
+        <Route path="*" element={<h1>404 - Not found</h1>} />
       </Routes>
     </BrowserRouter>
   );
