@@ -59,7 +59,7 @@ export default function FormSignIn() {
         <label>E-mail</label>
         <input
           placeholder="Digite seu e-mail"
-          type="text"
+          type="email"
           name="email"
           value={form.email}
           onChange={onChange}

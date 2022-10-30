@@ -3,9 +3,10 @@ import AccountDetails from "./pages/AccountDetails";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import { getLocalStorage } from "./utils/storage";
 
 function ProtectedRoutes({ redirectTo }) {
-  const isAuthenticated = true;
+  const isAuthenticated = getLocalStorage("token");
   return isAuthenticated ? <Outlet /> : <Navigate to={redirectTo} />;
 }
 

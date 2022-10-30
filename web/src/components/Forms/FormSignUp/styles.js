@@ -46,6 +46,14 @@ export const Cointainer = styled.form`
   }
 `;
 
+export const ErrorMessage = styled.div`
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  width: 100%;
+  color: #e70000;
+`;
+
 export const Button = styled.button`
   width: 16rem;
   height: 3.3rem;
