@@ -1,6 +1,6 @@
 import { Container, ContainerLeft, Image, ContainerRight, CardForm } from "./styles";
 import { Link } from "react-router-dom";
-import FormLogin from "../../components/Forms/FormLogin";
+import FormSignIn from "../../components/Forms/FormSignIn";
 import WomanCheeringImage from "../../assets/woman_cheering.png";
 
 export default function SignIn() {
@@ -14,7 +14,7 @@ export default function SignIn() {
         <CardForm>
           <h1>Faça seu login!</h1>
 
-          <FormLogin />
+          <FormSignIn />
         </CardForm>
         <span>
           Ainda não possui uma conta? <Link to="/signup">Cadastre-se</Link>

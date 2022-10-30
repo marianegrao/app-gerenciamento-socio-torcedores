@@ -6,4 +6,22 @@ const api = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-export default api;
+export const signIn = async (body) => {
+  let response = {};
+  try {
+    const returnApi = await api.post("/signin", body);
+    const { data } = returnApi;
+
+    response = {
+      userId: data.user.id,
+      token: data.token,
+      error: false,
+    };
+  } catch (error) {
+    response = {
+      message: error.response.data,
+      error: true,
+    };
+  }
+  return response;
+};

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Cointainer = styled.form`
+export const Container = styled.form`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -45,6 +45,14 @@ export const Cointainer = styled.form`
   @media (max-width: 880px) {
     width: 33rem;
   }
+`;
+
+export const ErrorMessage = styled.div`
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  width: 100%;
+  color: #e70000;
 `;
 
 export const Button = styled.button`
