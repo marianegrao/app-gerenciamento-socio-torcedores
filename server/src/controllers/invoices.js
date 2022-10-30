@@ -58,10 +58,10 @@ const payInvoice = async (req, res) => {
 		if (invoiceFound) {
 			const invoiceUpdated = await knex("monthy_subscriptions_invoices")
 				.update("status", "paid")
-				.where("id", id_invoice)
+				.where("id", invoiceFound.id)
 				.returning("*");
 			if (!invoiceUpdated) {
-				res.status(400).json("Fatura não foi possivel pagar");
+				res.status(400).json("Não foi possivel pagar fatura");
 			}
 			return res.status(200).json("Fatura paga com sucesso!");
 		} else {
