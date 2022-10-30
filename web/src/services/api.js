@@ -25,3 +25,20 @@ export const signIn = async (body) => {
   }
   return response;
 };
+
+export const signUp = async (body) => {
+  let response = {};
+  try {
+    await api.post("/signup", body);
+
+    response = {
+      error: false,
+    };
+  } catch (error) {
+    response = {
+      message: error.response.data,
+      error: true,
+    };
+  }
+  return response;
+};

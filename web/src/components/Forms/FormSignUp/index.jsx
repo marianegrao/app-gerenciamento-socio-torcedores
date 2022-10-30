@@ -1,11 +1,14 @@
-import { Cointainer, Button, ErrorMessage } from "./styles";
-import { signIn } from "../../../services/api";
+import { Container, Button, ErrorMessage } from "./styles";
+import { signUp } from "../../../services/api";
+import { useState } from "react";
+import SignUpSuccess from "../../Modals/SignUpSuccess";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 
 export default function FormSignUp() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
   const [warning, setWarning] = useState({ message: "", error: false });
+  const [showSuccess, setShowSuccess] = useState(false);
+  const navigate = useNavigate();
 
   function onChange(evt) {
     const { value } = evt.target;
@@ -17,35 +20,56 @@ export default function FormSignUp() {
     }));
   }
 
+  function clearForm() {
+    setForm({ name: "", email: "", password: "", confirmPassword: "" });
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!form.name || !form.email || !form.password) {
+    if (!form.name || !form.email || !form.password || !form.confirmPassword) {
       setWarning({
         message: "Todos os campos devem ser preenchidos",
         error: true,
       });
-      setTimeout(() => setWarning({ message: "", error: false }), 5000);
+      clearForm();
+      setTimeout(() => setWarning({ message: "", error: false }), 3000);
       return;
     }
 
-    const response = await signIn(form);
+    if (form.password !== form.confirmPassword) {
+      setWarning({
+        message: "Senhas não coincidem",
+        error: true,
+      });
+      clearForm();
+      setTimeout(() => setWarning({ message: "", error: false }), 3000);
+      return;
+    }
+    const { confirmPassword, ...formData } = form;
+
+    const response = await signUp(formData);
 
     if (!response.error) {
-      setLocalStorage("token", response.token);
-      setLocalStorage("userId", response.userId);
-      navigate("/home");
+      clearForm();
+      setShowSuccess(true);
+      setTimeout(() => {
+        (() => {
+          setShowSuccess(false);
+          navigate("/");
+        })();
+      }, 3000);
     } else {
       setWarning({
         message: response.message,
         error: true,
       });
-      setForm({ email: "", password: "" });
-      setTimeout(() => setWarning({ message: "", error: false }), 5000);
+      clearForm();
+      setTimeout(() => setWarning({ message: "", error: false }), 3000);
     }
   }
 
   return (
-    <Cointainer onSubmit={handleSubmit}>
+    <Container onSubmit={handleSubmit}>
       <div>
         <label>Nome</label>
         <input
@@ -78,9 +102,21 @@ export default function FormSignUp() {
           onChange={onChange}
         />
       </div>
+
+      <div>
+        <label>Confirmar senha</label>
+        <input
+          placeholder="Confirme sua senha"
+          type="password"
+          name="confirmPassword"
+          value={form.confirmPassword}
+          onChange={onChange}
+        />
+      </div>
+
       <ErrorMessage>{warning.error && <p>{warning.message}</p>}</ErrorMessage>
       <Button>Cadastrar</Button>
-      <div>Cadastro concluído com sucesso</div>
-    </Cointainer>
+      {showSuccess && <SignUpSuccess message="Cadastro realizado com sucesso" />}
+    </Container>
   );
 }
