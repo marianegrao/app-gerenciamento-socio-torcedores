@@ -27,5 +27,6 @@ routes.delete("/users", users.deleteUser);
 
 routes.post("/clubs/:id/subscription", subscriptions.registerSubscription);
 routes.get("/invoices", invoices.listInvoices);
+routes.patch("/invoices/:id", invoices.payInvoice);
 
 module.exports = routes;

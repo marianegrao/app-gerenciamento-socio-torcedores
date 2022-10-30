@@ -7,36 +7,38 @@ const {
 const generateNextInvoices = async (
 	due_date,
 	monthly_subscription,
-	idSubscription,
+	id_subscription,
 	club_name
 ) => {
 	const response = { error: false, message: "", status: 200, data: "" };
 
-	const dataInvoice = {
-		due_date: "2022-10-29",
-		id_subscription: 10,
-		monthly_payment: 55,
-		club_name: "Ceará SC	",
-	};
+	let dataToBeRegistered = [];
 	try {
-		for (let i = 0; i < 12; i++) {
-			const dueDateFormated = parseISO(dataInvoice.due_date);
+		for (let i = 1; i < 13; i++) {
+			let dataInvoice = {
+				due_date,
+				id_subscription,
+				club_name,
+				monthly_payment: monthly_subscription,
+			};
 
-			const nextDueDate = addMonths(dueDateFormated, i);
+			let dueDateFormated = parseISO(dataInvoice.due_date);
 
-			dataInvoice.due_date = nextDueDate;
+			dataInvoice.due_date = addMonths(dueDateFormated, i);
+
 			await schemaRegisterNextInvoices.validate(dataInvoice);
 
-			const invoiceRegistered = await knex("monthy_subscriptions_invoices")
-				.insert(dataInvoice)
-				.returning("*");
+			dataToBeRegistered.push(dataInvoice);
+		}
 
-			if (!invoiceRegistered) {
-				response.error = true;
-				response.message = `Não foi possível gerar a fatura de número ${i}.`;
-				response.status = 400;
-				return;
-			}
+		const invoiceRegistered = await knex("monthy_subscriptions_invoices")
+			.insert(dataToBeRegistered)
+			.returning("*");
+
+		if (!invoiceRegistered) {
+			response.error = true;
+			response.message = `Não foi possível gerar uma(s) fatura(s)`;
+			response.status = 400;
 		}
 
 		return response;
@@ -47,5 +49,5 @@ const generateNextInvoices = async (
 		return response;
 	}
 };
-generateNextInvoices();
+
 module.exports = generateNextInvoices;

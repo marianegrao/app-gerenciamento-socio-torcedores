@@ -4,8 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
 	  id SERIAL PRIMARY KEY,
   	name TEXT NOT NULL,
   	email TEXT NOT NULL UNIQUE,
-  	password TEXT NOT NULL,
-    status TEXT DEFAULT 'inactive'
+  	password TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS clubs (
@@ -22,8 +21,8 @@ CREATE TABLE IF NOT EXISTS subscriptions (
 	  id SERIAL PRIMARY KEY,
   	id_club INTEGER NOT NULL,
     id_user INTEGER NOT NULL,
-    due_date DATE NOT NULL,
-    status TEXT DEFAULT 'inactive',
+    start_date DATE NOT NULL,
+    user_status TEXT DEFAULT 'inactive',
   	FOREIGN KEY (id_club) REFERENCES clubs (id),
     FOREIGN KEY (id_user) REFERENCES users (id)
 );
