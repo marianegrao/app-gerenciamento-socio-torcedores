@@ -7,9 +7,9 @@ export default function CardDatailUser() {
     <Container>
       <CardHeader>
         <h2>Meus dados</h2>
-        <button>
+        {/* <button>
           <PencilSimpleLine size={18} /> <span>Editar perfil</span>
-        </button>
+        </button> */}
       </CardHeader>
       <CardContainerSections>
         <CardSection>

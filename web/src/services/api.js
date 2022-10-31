@@ -112,7 +112,7 @@ export const listInvoices = async () => {
 export const payInvoice = async (id) => {
   let response = {};
   try {
-    const returnApi = await api.put(
+    const returnApi = await api.patch(
       `/invoices/${id}`,
       {},
       {
