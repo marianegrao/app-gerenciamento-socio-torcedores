@@ -14,6 +14,7 @@ import { Money } from "phosphor-react";
 import "./styles.css";
 import { listInvoices } from "../../services/api";
 import { useGlobalContext } from "../../hooks/useGlobalContext";
+import { parseISO, format } from "date-fns";
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.body}`]: {
@@ -103,8 +104,10 @@ export default function TableInvoices() {
                 <StyledTableRow key={invoice.id} className="row_table">
                   <StyledTableCell align="center">{invoice.club_name}</StyledTableCell>
                   <StyledTableCell align="center">{invoice.id}</StyledTableCell>
-                  <StyledTableCell align="center">{invoice.due_date}</StyledTableCell>
-                  <StyledTableCell align="center">{invoice.monthly_payment}</StyledTableCell>
+                  <StyledTableCell align="center">
+                    {format(parseISO(invoice.due_date), "dd/LL/yyyy")}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">R$ {invoice.monthly_payment},00</StyledTableCell>
                   <StyledTableCell align="center">
                     <GetStatus align="center" invoice={invoice} />
                   </StyledTableCell>

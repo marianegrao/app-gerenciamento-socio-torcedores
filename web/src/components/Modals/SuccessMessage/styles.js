@@ -12,7 +12,6 @@ export const Container = styled.div`
   background-color: rgba(145, 154, 150, 0.3);
   backdrop-filter: blur(4px);
   z-index: 2;
-  padding: 0rem 58rem;
 `;
 
 export const Modal = styled.div`
@@ -22,6 +21,7 @@ export const Modal = styled.div`
   justify-content: center;
   gap: 5rem;
 
+  width: 50rem;
   height: 45rem;
   background: #f0f0f5;
   border-radius: 3rem;
