@@ -65,6 +65,7 @@ const registerSubscription = async (req, res) => {
 };
 
 const listSubscriptions = async (req, res) => {
+	const { id: id_user } = req.user;
 	try {
 		const subscriptionsListed = await knex("subscriptions")
 			.select(
@@ -72,6 +73,7 @@ const listSubscriptions = async (req, res) => {
 				"clubs.*",
 				"subscriptions.id as id_subscription"
 			)
+			.where("subscriptions.id_user", id_user)
 			.leftJoin("clubs", "clubs.id", "subscriptions.id_club");
 
 		if (!subscriptionsListed) {
