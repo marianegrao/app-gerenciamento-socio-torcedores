@@ -2,10 +2,21 @@ import { useContext, useState } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 
 export function useGlobalProvider() {
-  const [clubSelected, setClubSelected] = useState({});
+  const [showLogout, setShowLogout] = useState(false);
+  function handleShowLogout() {
+    setShowLogout(!showLogout);
+  }
+
+  const [showPopUp, setShowPopUp] = useState(false);
+  function handleShowPopUp() {
+    setShowPopUp(!showPopUp);
+  }
+
   return {
-    clubSelected,
-    setClubSelected,
+    showLogout,
+    handleShowLogout,
+    showPopUp,
+    handleShowPopUp,
   };
 }
 

@@ -18,7 +18,9 @@ export const Cointainer = styled.aside`
     align-items: center;
     flex-direction: column;
     gap: 1rem;
-    color: #9b9bb2;
+
+    font-weight: 600;
+    color: #343447;
   }
   a {
     text-decoration: none;

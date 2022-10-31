@@ -12,3 +12,23 @@ export const Main = styled.main`
   width: calc(100vw - 108px);
   padding: 30px 32px 0px 32px;
 `;
+
+export const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+
+  h1 {
+    font-family: "Montserrat";
+    font-weight: 600;
+    font-size: 2.6rem;
+    color: #343447;
+    margin-bottom: 1.5rem;
+    padding: 0px 4rem;
+  }
+
+  div {
+    border: 0.1rem solid #acd9c5;
+  }
+`;
