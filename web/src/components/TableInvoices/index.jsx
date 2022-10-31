@@ -1,128 +1,135 @@
-import * as React from "react";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { tableCellClasses } from "@mui/material/TableCell";
+import { useState, useEffect } from "react";
+import { Money } from "phosphor-react";
+import "./styles.css";
+import { listInvoices } from "../../services/api";
+import { useGlobalContext } from "../../hooks/useGlobalContext";
 
-const columns = [
-  { id: "name", label: "Id", minWidth: 70 },
-  { id: "code", label: "Data de venc.", minWidth: 70 },
-  {
-    id: "population",
-    label: "Clube",
-    minWidth: 70,
-    format: (value) => value.toLocaleString("en-US"),
+const StyledTableCell = styled(TableCell)(() => ({
+  [`&.${tableCellClasses.body}`]: {
+    fontFamily: "Nunito",
+    fontWeight: 400,
+    fontSize: 14,
+    lineHeight: "5px",
+    letterSpacing: "0.005em",
+    color: "#747488",
   },
-  {
-    id: "size",
-    label: "Valor",
-    minWidth: 70,
-    format: (value) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "density",
-    label: "Status",
-    minWidth: 70,
-    format: (value) => value.toFixed(2),
-  },
-  {
-    id: "density",
-    label: "",
-    minWidth: 70,
-    format: (value) => value.toFixed(2),
-  },
-];
+}));
 
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
+const StyledTableRow = styled(TableRow)(() => ({
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
+
+function GetStatus({ invoice }) {
+  let className = "";
+  let status = "";
+
+  if (invoice.status === "paid") {
+    className = "status_table status--true";
+    status = "Paga";
+  } else if (invoice.status === "overdue") {
+    className = "status_table status--false";
+    status = "Vencida";
+  } else {
+    className = "status_table status--pending";
+    status = "Pendente";
+  }
+
+  return <div className={className}>{status}</div>;
 }
-const rows = [
-  createData("India", "IN", 1324171354, 3287263),
-  createData("China", "CN", 1403500365, 9596961),
-  createData("Italy", "IT", 60483973, 301340),
-  createData("United States", "US", 327167434, 9833520),
-  createData("Canada", "CA", 37602103, 9984670),
-  createData("Australia", "AU", 25475400, 7692024),
-  createData("Germany", "DE", 83019200, 357578),
-  createData("Ireland", "IE", 4857000, 70273),
-  createData("Mexico", "MX", 126577691, 1972550),
-  createData("Japan", "JP", 126317000, 377973),
-  createData("France", "FR", 67022000, 640679),
-  createData("United Kingdom", "GB", 67545757, 242495),
-  createData("Russia", "RU", 146793744, 17098246),
-  createData("Nigeria", "NG", 200962417, 923768),
-  createData("Brazil", "BR", 210147125, 8515767),
-  createData("Brazil", "BR", 210147125, 8515767),
-];
 
 export default function TableInvoices() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const { invoices, setInvoices, handleShowModalPayInvoice, setCurrentInvoice, refreshPage } =
+    useGlobalContext();
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  async function handleListInvoices() {
+    const response = await listInvoices();
+    if (!response.error) {
+      setInvoices(response.data);
+    }
+  }
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  function handleShowModalPayInvoiceById(invoice) {
+    handleShowModalPayInvoice();
+
+    setCurrentInvoice(invoice);
+  }
+
+  useEffect(() => {
+    handleListInvoices();
+  }, [refreshPage]);
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden", borderRadius: "12px", boxShadow: "unset" }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+    <>
+      <TableContainer className="table" component={Paper}>
+        <Table>
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align="center"
-                  style={{
-                    fontFamily: "Nunito",
-                    minWidth: column.minWidth,
-                    fontSize: "1.6rem",
-                    lineHeight: "5rem",
-                    fontWeight: "700",
-                  }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
+              <StyledTableCell className="header-title_table" align="center">
+                Clube
+              </StyledTableCell>
+              <StyledTableCell className="header-title_table" align="center">
+                ID Fatura
+              </StyledTableCell>
+              <StyledTableCell className="header-title_table" align="center">
+                Data de venc
+              </StyledTableCell>
+              <StyledTableCell className="header-title_table" align="center">
+                Valor
+              </StyledTableCell>
+              <StyledTableCell className="header-title_table" align="center">
+                Status
+              </StyledTableCell>
+              <StyledTableCell className="header-title_table" align="center">
+                Pagar fatura
+              </StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align="center">
-                        {column.format && typeof value === "number" ? column.format(value) : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
+            {invoices &&
+              invoices.map((invoice) => (
+                <StyledTableRow key={invoice.id} className="row_table">
+                  <StyledTableCell align="center">{invoice.club_name}</StyledTableCell>
+                  <StyledTableCell align="center">{invoice.id}</StyledTableCell>
+                  <StyledTableCell align="center">{invoice.due_date}</StyledTableCell>
+                  <StyledTableCell align="center">{invoice.monthly_payment}</StyledTableCell>
+                  <StyledTableCell align="center">
+                    <GetStatus align="center" invoice={invoice} />
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <button
+                      type="button"
+                      onClick={() => handleShowModalPayInvoiceById(invoice)}
+                      style={{ all: "unset", cursor: "pointer" }}
+                    >
+                      <div className="button-pay-invoice">
+                        <Money size={32} weight="fill" />
+                        <strong>Pagar fatura</strong>
+                      </div>
+                    </button>
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
           </TableBody>
         </Table>
+        {invoices.length === 0 && (
+          <div className="empty__search">
+            <p className="search__title">Você não possui faturas</p>
+          </div>
+        )}
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+    </>
   );
 }

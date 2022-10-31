@@ -1,6 +1,6 @@
 import { Container, Modal } from "./styles";
 import { CheckCircle } from "phosphor-react";
-export default function SignUpSuccess({ message }) {
+export default function SuccessMessage({ message }) {
   return (
     <Container>
       <Modal>

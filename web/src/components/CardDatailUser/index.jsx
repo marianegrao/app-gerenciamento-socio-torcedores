@@ -1,6 +1,8 @@
 import { Container, CardHeader, CardContainerSections, CardSection } from "./styles";
 import { PencilSimpleLine } from "phosphor-react";
+import { useGlobalContext } from "../../hooks/useGlobalContext";
 export default function CardDatailUser() {
+  const { userData } = useGlobalContext();
   return (
     <Container>
       <CardHeader>
@@ -12,12 +14,12 @@ export default function CardDatailUser() {
       <CardContainerSections>
         <CardSection>
           <strong>Nome</strong>
-          <span>sarasilva</span>
+          <span>{userData.name}</span>
         </CardSection>
 
         <CardSection>
           <strong>E-mail</strong>
-          <span>sarasilva@gmail.com</span>
+          <span>{userData.email}</span>
         </CardSection>
       </CardContainerSections>
     </Container>

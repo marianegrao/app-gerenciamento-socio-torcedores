@@ -1,7 +1,7 @@
 import { Container, Button, ErrorMessage } from "./styles";
 import { signUp } from "../../../services/api";
 import { useState } from "react";
-import SignUpSuccess from "../../Modals/SignUpSuccess";
+import SuccessMessage from "../../Modals/SuccessMessage";
 import { useNavigate } from "react-router-dom";
 
 export default function FormSignUp() {
@@ -116,7 +116,7 @@ export default function FormSignUp() {
 
       <ErrorMessage>{warning.error && <p>{warning.message}</p>}</ErrorMessage>
       <Button>Cadastrar</Button>
-      {showSuccess && <SignUpSuccess message="Cadastro realizado com sucesso" />}
+      {showSuccess && <SuccessMessage message="Cadastro realizado com sucesso" />}
     </Container>
   );
 }

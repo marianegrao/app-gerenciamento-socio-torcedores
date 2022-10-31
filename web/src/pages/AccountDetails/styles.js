@@ -29,14 +29,23 @@ export const Header = styled.header`
 `;
 
 export const CardTableInvoices = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  height: 45rem;
+  overflow-y: auto;
 
-  padding: 2.4rem 1rem;
+  padding: 1.4rem 0rem;
 
   background: #ffffff;
   border-radius: 30px;
 
   h2 {
+    display: flex;
+    justify-content: flex-start;
+    width: 95%;
     font-family: "Montserrat";
     font-weight: 700;
     font-size: 1.8rem;

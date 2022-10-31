@@ -12,11 +12,33 @@ export function useGlobalProvider() {
     setShowPopUp(!showPopUp);
   }
 
+  const [userData, setUserData] = useState({});
+
+  const [invoices, setInvoices] = useState([]);
+
+  const [showModalPayInvoice, setShowModalPayInvoice] = useState(false);
+  function handleShowModalPayInvoice() {
+    setShowModalPayInvoice(!showModalPayInvoice);
+  }
+  const [currentInvoice, setCurrentInvoice] = useState("");
+
+  const [refreshPage, setRefreshPage] = useState(false);
+
   return {
     showLogout,
     handleShowLogout,
     showPopUp,
     handleShowPopUp,
+    userData,
+    setUserData,
+    invoices,
+    setInvoices,
+    showModalPayInvoice,
+    handleShowModalPayInvoice,
+    currentInvoice,
+    setCurrentInvoice,
+    refreshPage,
+    setRefreshPage,
   };
 }
 

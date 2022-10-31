@@ -55,7 +55,7 @@ export const detailUser = async () => {
       },
     });
     response = {
-      ...data,
+      data,
       error: false,
     };
   } catch (error) {
@@ -75,6 +75,52 @@ export const listSubscriptions = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
+    response = {
+      data: returnApi.data,
+      error: false,
+    };
+  } catch (error) {
+    response = {
+      message: error.response.data,
+      error: true,
+    };
+  }
+  return response;
+};
+
+export const listInvoices = async () => {
+  let response = {};
+  try {
+    const returnApi = await api.get("/invoices", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    response = {
+      data: returnApi.data,
+      error: false,
+    };
+  } catch (error) {
+    response = {
+      message: error.response.data,
+      error: true,
+    };
+  }
+  return response;
+};
+
+export const payInvoice = async (id) => {
+  let response = {};
+  try {
+    const returnApi = await api.put(
+      `/invoices/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     response = {
       data: returnApi.data,
       error: false,
