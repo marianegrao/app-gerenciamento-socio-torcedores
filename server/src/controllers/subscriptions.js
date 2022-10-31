@@ -66,7 +66,13 @@ const registerSubscription = async (req, res) => {
 
 const listSubscriptions = async (req, res) => {
 	try {
-		const subscriptionsListed = await knex("subscriptions").select("*");
+		const subscriptionsListed = await knex("subscriptions")
+			.select(
+				"subscriptions.*",
+				"clubs.*",
+				"subscriptions.id as id_subscription"
+			)
+			.leftJoin("clubs", "clubs.id", "subscriptions.id_club");
 
 		if (!subscriptionsListed) {
 			return res.status(400).json("Não foi possível listar assinaturas");
