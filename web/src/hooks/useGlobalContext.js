@@ -24,6 +24,12 @@ export function useGlobalProvider() {
 
   const [refreshPage, setRefreshPage] = useState(false);
 
+  const [currentClub, setCurrentClub] = useState({});
+  const [showSubscription, setShowSubscription] = useState(false);
+  function handleShowSubscription() {
+    setShowSubscription(!showSubscription);
+  }
+
   return {
     showLogout,
     handleShowLogout,
@@ -39,6 +45,10 @@ export function useGlobalProvider() {
     setCurrentInvoice,
     refreshPage,
     setRefreshPage,
+    showSubscription,
+    currentClub,
+    setCurrentClub,
+    handleShowSubscription,
   };
 }
 

@@ -4,7 +4,7 @@ import { listSubscriptions } from "../../services/api";
 import { useEffect, useState } from "react";
 
 export default function CardClub() {
-  const [subscriptions, setSubscriptions] = useState([]);
+  const [subscriptions, setSubscriptions, refreshPage] = useState([]);
   async function handleListSubscriptions() {
     const response = await listSubscriptions();
 
@@ -14,7 +14,7 @@ export default function CardClub() {
   }
   useEffect(() => {
     handleListSubscriptions();
-  }, []);
+  }, [refreshPage]);
   return (
     <Container>
       {subscriptions &&

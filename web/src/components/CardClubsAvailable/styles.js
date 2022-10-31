@@ -10,6 +10,7 @@ export const Container = styled.div`
 export const ClubCard = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
 
   width: 36rem;
@@ -23,7 +24,7 @@ export const CardHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 2rem 0;
+  margin-bottom: 1rem;
   gap: 1rem;
 
   img {
@@ -59,5 +60,25 @@ export const CardPrince = styled.div`
 
     font-weight: 700;
     font-size: 24px;
+  }
+`;
+export const Button = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16rem;
+  height: 3.3rem;
+  padding: 0.4rem 4rem;
+
+  background-color: #034a2a;
+  border-radius: 1rem;
+
+  font-family: "Nunito";
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+  color: #f8f8f9;
+
+  :hover {
+    transform: scale(1.1);
   }
 `;

@@ -150,3 +150,24 @@ export const payInvoice = async (id) => {
   }
   return response;
 };
+
+export const registerSubscription = async (id, body) => {
+  let response = {};
+  try {
+    const returnApi = await api.post(`/clubs/${id}/subscription`, body, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    response = {
+      data: returnApi.data,
+      error: false,
+    };
+  } catch (error) {
+    response = {
+      message: error.response.data,
+      error: true,
+    };
+  }
+  return response;
+};
