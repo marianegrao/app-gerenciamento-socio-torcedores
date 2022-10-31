@@ -66,3 +66,24 @@ export const detailUser = async () => {
   }
   return response;
 };
+
+export const listSubscriptions = async () => {
+  let response = {};
+  try {
+    const returnApi = await api.get("/subscriptions", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    response = {
+      data: returnApi.data,
+      error: false,
+    };
+  } catch (error) {
+    response = {
+      message: error.response.data,
+      error: true,
+    };
+  }
+  return response;
+};
