@@ -6,7 +6,7 @@ export const Container = styled.div`
 
   position: absolute;
   top: 8rem;
-  right: 4rem;
+  right: 3.5rem;
 
   width: 12rem;
   height: 6.2rem;

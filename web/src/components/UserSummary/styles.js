@@ -3,7 +3,6 @@ export const Container = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  padding: 0px 10rem;
 `;
 
 export const CardSummary = styled.summary`

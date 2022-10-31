@@ -10,7 +10,7 @@ export const Main = styled.main`
   flex-direction: column;
   align-items: center;
   width: calc(100vw - 108px);
-  padding: 30px 32px 0px 32px;
+  padding: 3rem 12rem 0px 12rem;
 `;
 
 export const Section = styled.section`
