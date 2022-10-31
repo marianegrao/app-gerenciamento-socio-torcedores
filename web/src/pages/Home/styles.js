@@ -16,6 +16,12 @@ export const Main = styled.main`
 export const Section = styled.section`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
+
+export const SectionTitle = styled.div`
+  display: flex;
   justify-content: flex-start;
   width: 100%;
 
@@ -27,8 +33,10 @@ export const Section = styled.section`
     margin-bottom: 1.5rem;
     padding: 0px 4rem;
   }
+`;
 
-  div {
-    border: 0.1rem solid #acd9c5;
-  }
+export const SectionLineDiv = styled.div`
+  width: 100%;
+  margin-bottom: 2rem;
+  border: 0.1rem solid #acd9c5;
 `;
