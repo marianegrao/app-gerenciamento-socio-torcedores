@@ -21,6 +21,15 @@ const registerSubscription = async (req, res) => {
 			return res.status(status).json(message);
 		}
 
+		const alreadySubscription = await knex("subscriptions")
+			.where({ id_user })
+			.andWhere({ id_club })
+			.first();
+
+		if (alreadySubscription) {
+			return res.status(400).json("Usuário já é assinante desse clube");
+		}
+
 		await schemaRegisterSubscription.validate(dataSubscription);
 
 		const subscriptionRegistered = await knex("subscriptions")
