@@ -35,7 +35,7 @@ export default function UserSummary() {
   }
   useEffect(() => {
     handleDetailUser();
-  });
+  }, []);
   return (
     <Container>
       <CardSummary>

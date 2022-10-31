@@ -1,7 +1,7 @@
 import { Container, ClubCard, CardHeader, CardSocialMedia, CardPrince } from "./styles";
 import { InstagramLogo, Globe, TwitterLogo } from "phosphor-react";
 import { listSubscriptions } from "../../services/api";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function CardClub() {
   const [subscriptions, setSubscriptions] = useState([]);
@@ -14,12 +14,12 @@ export default function CardClub() {
   }
   useEffect(() => {
     handleListSubscriptions();
-  });
+  }, []);
   return (
     <Container>
       {subscriptions &&
         subscriptions.map((subsc) => (
-          <ClubCard>
+          <ClubCard key={subsc.id_subscription}>
             <CardHeader>
               <img src={subsc.insignia} alt="imagem brasão time" />
               <h1>{subsc.name}</h1>
@@ -27,17 +27,23 @@ export default function CardClub() {
             <CardSocialMedia>
               {subsc.instagram && (
                 <button>
-                  <InstagramLogo size={32} />
+                  <a href={subsc.instagram}>
+                    <InstagramLogo color="#0e8750" size={32} />
+                  </a>
                 </button>
               )}
               {subsc.website && (
                 <button>
-                  <Globe size={32} />
+                  <a href={subsc.website}>
+                    <Globe color="#0e8750" size={32} />
+                  </a>
                 </button>
               )}
               {subsc.twitter && (
                 <button>
-                  <TwitterLogo size={32} />
+                  <a href={subsc.twitter}>
+                    <TwitterLogo color="#0e8750" size={32} />
+                  </a>
                 </button>
               )}
             </CardSocialMedia>
@@ -46,9 +52,10 @@ export default function CardClub() {
               <strong>
                 {" "}
                 R$
-                {amout.toFixed(2).replace(".", ",")}
+                {subsc.monthly_subscription.toFixed(2).replace(".", ",")}
               </strong>
             </CardPrince>
+            <button>Cancelar assinatura</button>
           </ClubCard>
         ))}
     </Container>
