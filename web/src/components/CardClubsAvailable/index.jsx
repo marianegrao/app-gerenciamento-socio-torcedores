@@ -1,47 +1,47 @@
 import { Container, ClubCard, CardHeader, CardSocialMedia, CardPrince } from "./styles";
 import { InstagramLogo, Globe, TwitterLogo } from "phosphor-react";
-import { listSubscriptions } from "../../services/api";
+import { listClubs } from "../../services/api";
 import { useEffect, useState } from "react";
 
-export default function CardClub() {
-  const [subscriptions, setSubscriptions] = useState([]);
-  async function handleListSubscriptions() {
-    const response = await listSubscriptions();
+export default function CardClubsAvailable() {
+  const [clubs, setClubs] = useState([]);
 
+  async function handleListClubs() {
+    const response = await listClubs();
     if (!response.error) {
-      setSubscriptions(response.data);
+      setClubs(response.data);
     }
   }
   useEffect(() => {
-    handleListSubscriptions();
+    handleListClubs();
   }, []);
   return (
     <Container>
-      {subscriptions &&
-        subscriptions.map((subsc) => (
-          <ClubCard key={subsc.id_subscription}>
+      {clubs &&
+        clubs.map((clubs) => (
+          <ClubCard key={clubs.id}>
             <CardHeader>
-              <img src={subsc.insignia} alt="imagem brasão time" />
-              <h1>{subsc.name}</h1>
+              <img src={clubs.insignia} alt="imagem brasão time" />
+              <h1>{clubs.name}</h1>
             </CardHeader>
             <CardSocialMedia>
-              {subsc.instagram && (
+              {clubs.instagram && (
                 <button>
-                  <a href={subsc.instagram}>
+                  <a href={clubs.instagram}>
                     <InstagramLogo color="#0e8750" size={32} />
                   </a>
                 </button>
               )}
-              {subsc.website && (
+              {clubs.website && (
                 <button>
-                  <a href={subsc.website}>
+                  <a href={clubs.website}>
                     <Globe color="#0e8750" size={32} />
                   </a>
                 </button>
               )}
-              {subsc.twitter && (
+              {clubs.twitter && (
                 <button>
-                  <a href={subsc.twitter}>
+                  <a href={clubs.twitter}>
                     <TwitterLogo color="#0e8750" size={32} />
                   </a>
                 </button>
@@ -50,13 +50,14 @@ export default function CardClub() {
             <CardPrince>
               <p>Assinatura</p>
               <strong>
+                {" "}
                 R$
-                {subsc.monthly_subscription.toFixed(2).replace(".", ",")}
+                {clubs.monthly_subscription.toFixed(2).replace(".", ",")}
               </strong>
             </CardPrince>
+            <button>Ser socio-torcedor</button>
           </ClubCard>
         ))}
-      {!subscriptions.length && <h2>Você ainda não é associado a algum clube</h2>}
     </Container>
   );
 }

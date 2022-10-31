@@ -1,4 +1,5 @@
 import CardClub from "../../components/CardClub";
+import CardClubsAvailable from "../../components/CardClubsAvailable";
 import LogoutConfirm from "../../components/Modals/LogoutConfirm";
 import { SidebarHome } from "../../components/SideBar";
 import UserSummary from "../../components/UserSummary";
@@ -26,6 +27,7 @@ export default function Home() {
             <h1>Clubes disponíveis</h1>
           </SectionTitle>
           <SectionLineDiv />
+          <CardClubsAvailable />
         </Section>
       </Main>
       {showLogout && <LogoutConfirm />}

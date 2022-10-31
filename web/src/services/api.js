@@ -88,6 +88,23 @@ export const listSubscriptions = async () => {
   return response;
 };
 
+export const listClubs = async () => {
+  let response = {};
+  try {
+    const returnApi = await api.get("/clubs");
+    response = {
+      data: returnApi.data,
+      error: false,
+    };
+  } catch (error) {
+    response = {
+      message: error.response.data,
+      error: true,
+    };
+  }
+  return response;
+};
+
 export const listInvoices = async () => {
   let response = {};
   try {
