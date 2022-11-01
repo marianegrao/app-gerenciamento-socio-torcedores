@@ -1,5 +1,5 @@
 import { Container, CardHeader, CardContainerSections, CardSection } from "./styles";
-import { PencilSimpleLine } from "phosphor-react";
+
 import { useGlobalContext } from "../../hooks/useGlobalContext";
 export default function CardDatailUser() {
   const { userData } = useGlobalContext();
@@ -7,9 +7,6 @@ export default function CardDatailUser() {
     <Container>
       <CardHeader>
         <h2>Meus dados</h2>
-        {/* <button>
-          <PencilSimpleLine size={18} /> <span>Editar perfil</span>
-        </button> */}
       </CardHeader>
       <CardContainerSections>
         <CardSection>

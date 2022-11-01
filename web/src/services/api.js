@@ -2,7 +2,7 @@ import axios from "axios";
 import { getLocalStorage } from "../utils/storage";
 
 const api = axios.create({
-  baseURL: "http://localhost:3100",
+  baseURL: "https://api-data-click.herokuapp.com",
   timeout: 10000,
   headers: { "Content-Type": "application/json" },
 });

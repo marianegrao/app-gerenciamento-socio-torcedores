@@ -1,7 +1,7 @@
 import { Container, ClubCard, CardHeader, CardSocialMedia, CardPrince } from "./styles";
 import { InstagramLogo, Globe, TwitterLogo } from "phosphor-react";
 import { listSubscriptions } from "../../services/api";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGlobalContext } from "../../hooks/useGlobalContext";
 
 export default function CardClub() {
