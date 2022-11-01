@@ -11,7 +11,7 @@ API: https://api-data-click.herokuapp.com
 
 **Atenção**:
 
-- A aplicação deployada sofre inconstâncias e bugs que podem não acontecer na aplicação local, mas que geralemente são solucionadas ao recarregar a página.
+- A aplicação deployada sofre inconstâncias e bugs que podem não acontecer na aplicação local, mas que geralmente são solucionadas ao recarregar a página.
 - A API deployada está [neste](https://github.com/marianegrao/api-gerenciamento-de-socio-torcedores) repositório, mas permanece igual a que está na pasta `server` desse repositório.
 
 ## Teste localmente
