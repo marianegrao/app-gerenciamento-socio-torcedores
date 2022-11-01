@@ -31,7 +31,7 @@ const registerSubscription = async (req, res) => {
 		}
 
 		await schemaRegisterSubscription.validate(dataSubscription);
-
+		dataSubscription.user_status = "active";
 		const subscriptionRegistered = await knex("subscriptions")
 			.insert(dataSubscription)
 			.returning("*");
@@ -49,13 +49,6 @@ const registerSubscription = async (req, res) => {
 
 		if (errorGenerete) {
 			return res.status(statusGenerete).json(messageGenerete);
-		}
-
-		const userStatusUpdated = await knex("users")
-			.update("status", "active")
-			.where("id", id_user);
-		if (!userStatusUpdated) {
-			res.status(404).json("Status do usuário não foi atualizado");
 		}
 
 		return res.status(201).json("Assinatura foi realizada com sucesso!");

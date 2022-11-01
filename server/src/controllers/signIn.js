@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const knex = require("../connection");
+const secret = require("../secret/secret");
 const signInValidate = require("../validations/schemaSignIn");
 
 const signIn = async (req, res) => {
@@ -19,7 +20,7 @@ const signIn = async (req, res) => {
 			return res.status(400).json("Email e/ou senha não conferem");
 		}
 
-		const token = jwt.sign({ id: user.id }, process.env.JWT_HASHPASSWORD, {
+		const token = jwt.sign({ id: user.id }, secret, {
 			expiresIn: "8h",
 		});
 

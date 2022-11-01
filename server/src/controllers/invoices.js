@@ -22,6 +22,9 @@ const listInvoices = async (req, res) => {
 				await knex("monthy_subscriptions_invoices")
 					.update("status", "overdue")
 					.where("id", invoice.id);
+				await knex("subscriptions")
+					.update("status", "defaulter")
+					.where("id", invoice.id_subscription);
 			}
 		});
 
