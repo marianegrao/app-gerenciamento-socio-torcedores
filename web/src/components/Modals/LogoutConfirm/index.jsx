@@ -4,10 +4,11 @@ import { removeLocalStorage } from "../../../utils/storage";
 import { Container, Modal, ContainerButtons, ButtonConfirm, ButtonCancel } from "./styles";
 
 export default function LogoutConfirm() {
-  const { handleShowLogout, handleShowPopUp } = useGlobalContext();
+  const { handleShowLogout, handleShowPopUp, setSubscriptions } = useGlobalContext();
   const navigate = useNavigate();
 
   function handleLogout() {
+    setSubscriptions([]);
     removeLocalStorage("token");
     removeLocalStorage("userId");
     handleShowLogout();

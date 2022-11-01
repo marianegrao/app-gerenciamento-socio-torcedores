@@ -25,6 +25,7 @@ export function useGlobalProvider() {
   const [refreshPage, setRefreshPage] = useState(false);
 
   const [currentClub, setCurrentClub] = useState({});
+  const [subscriptions, setSubscriptions] = useState([]);
   const [showSubscription, setShowSubscription] = useState(false);
   function handleShowSubscription() {
     setShowSubscription(!showSubscription);
@@ -48,6 +49,8 @@ export function useGlobalProvider() {
     showSubscription,
     currentClub,
     setCurrentClub,
+    subscriptions,
+    setSubscriptions,
     handleShowSubscription,
   };
 }

@@ -2,9 +2,11 @@ import { Container, ClubCard, CardHeader, CardSocialMedia, CardPrince } from "./
 import { InstagramLogo, Globe, TwitterLogo } from "phosphor-react";
 import { listSubscriptions } from "../../services/api";
 import { useEffect, useState } from "react";
+import { useGlobalContext } from "../../hooks/useGlobalContext";
 
 export default function CardClub() {
-  const [subscriptions, setSubscriptions, refreshPage] = useState([]);
+  const { subscriptions, setSubscriptions, refreshPage } = useGlobalContext();
+
   async function handleListSubscriptions() {
     const response = await listSubscriptions();
 
